@@ -33,8 +33,7 @@ public class TowerSpawn : MonoBehaviour
         }
         if (isFalling)
         {
-            Clone.transform.rotation = Quaternion.RotateTowards(transform.rotation, world.transform.rotation, 5f * Time.deltaTime);
-            if (Clone.transform.position.y <= 0)
+            if (Clone.transform.position.y == 0)
             {
                 isFalling = false;
                 BlockCreate();
