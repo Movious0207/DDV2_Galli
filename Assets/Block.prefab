@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5227388689606892760}
   - component: {fileID: 4583304704847052893}
   - component: {fileID: 7927237317813086803}
+  - component: {fileID: 2787374956216559402}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -122,7 +123,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876830005462577981}
   serializedVersion: 5
-  m_Mass: 2
+  m_Mass: 0.0000001
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -180,3 +181,15 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2787374956216559402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876830005462577981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca6f40d173574147a2c70aa290a68ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'

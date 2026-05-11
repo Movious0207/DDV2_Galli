@@ -657,7 +657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23113a61548e0704e9ef3d80976fffe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  speed: 20
+  speed: 5
   BlockAmount: 0
 --- !u!1 &2020399607
 GameObject:
@@ -787,7 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f65b6e97d9a27e48b7411f74f762550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  swingSpeed: 10
+  swingSpeed: 5
   worldCoords: {fileID: 1093226089}
 --- !u!54 &2020399613
 Rigidbody:
@@ -902,6 +902,7 @@ MonoBehaviour:
   BlockPrefab: {fileID: 1876830005462577981, guid: 6e348bec5a51bfb40bb0112fe246c7a8, type: 3}
   blockJoint: {fileID: 0}
   crane: {fileID: 2020399613}
+  world: {fileID: 1093226085}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

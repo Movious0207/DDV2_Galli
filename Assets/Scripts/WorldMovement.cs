@@ -24,7 +24,7 @@ public class WorldMovement : MonoBehaviour
         }
         if(isMoving)
         {
-            UnityEngine.Vector3 nextPosition = BlockAmount * -transform.up * 20;
+            UnityEngine.Vector3 nextPosition = BlockAmount * -transform.up * 1f;
             transform.position = UnityEngine.Vector3.MoveTowards(transform.position, nextPosition, speed * Time.deltaTime);
             if(transform.position == nextPosition)
             {
