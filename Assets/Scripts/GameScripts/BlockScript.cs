@@ -10,7 +10,7 @@ public class BlockScript : MonoBehaviour
             collided = true;
             worldCollided = true;
         }
-        if (collision.gameObject.name == "Block(Clone)")
+        if (collision.gameObject.tag == "Block")
         {
             collided  = true;
         }

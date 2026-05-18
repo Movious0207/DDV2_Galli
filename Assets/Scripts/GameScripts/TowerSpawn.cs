@@ -21,13 +21,13 @@ public class TowerSpawn : MonoBehaviour
         blockJoint = Clone.GetComponent<HingeJoint>();
         blockJoint.connectedBody = crane;
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         BlockCreate();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) 
@@ -35,7 +35,7 @@ public class TowerSpawn : MonoBehaviour
             Clone.transform.SetParent(null);
             Destroy(Clone.GetComponent<HingeJoint>());
             isFalling = true;
-            Clone.transform.rotation = new Quaternion(0,0,0,0);
+            Clone.transform.rotation = new Quaternion(0,180,0,0);
             Clone.GetComponent<Rigidbody>().freezeRotation = true;
         }
         if (isFalling)
@@ -45,29 +45,44 @@ public class TowerSpawn : MonoBehaviour
                 if(blockScript.worldCollided)
                 {
                     FirstBlock = Clone;
-                    LastBlock = Clone; 
+                    LastBlock = Clone;
+                    blockScript = null;
+                    Clone.transform.SetParent(newParent);
+                    Clone.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+                    Clone.GetComponent<Rigidbody>().isKinematic = true;
+                    isFalling = false;
+                    world.BlockAmount++;
+                    BlockCreate();
                 }
                 else
                 {
-                    if(Clone.transform.position.x < LastBlock.transform.position.x + 0.2f && Clone.transform.position.x > LastBlock.transform.position.x - 0.2f)
+                    if(Clone.transform.position.x < LastBlock.transform.position.x + 1.5f && Clone.transform.position.x > LastBlock.transform.position.x - 1.5f)
                     {
-                        Clone.transform.position = new Vector3 (LastBlock.transform.position.x, Clone.transform.position.y, Clone.transform.position.z); 
+                        if (Clone.transform.position.x < LastBlock.transform.position.x + 0.2f && Clone.transform.position.x > LastBlock.transform.position.x - 0.2f)
+                        {
+                            Clone.transform.position = new Vector3(LastBlock.transform.position.x, Clone.transform.position.y, Clone.transform.position.z);
+                        }
+                        LastBlock = Clone;
+                        blockScript = null;
+                        Clone.transform.SetParent(newParent);
+                        Clone.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+                        Clone.GetComponent<Rigidbody>().isKinematic = true;
+                        isFalling = false;
+                        world.BlockAmount++;
+                        BlockCreate();
                     }
-                    LastBlock = Clone;
+                    else
+                    {
+                        Clone.GetComponent<Rigidbody>().freezeRotation = false;
+                        isFalling = false;
+                    }
                 }
-                blockScript = null;
-                Clone.transform.SetParent(newParent);
-                Clone.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
-                Clone.GetComponent<Rigidbody>().isKinematic = true;
-                isFalling = false;
-                world.BlockAmount ++;
-                BlockCreate();
             }
-            if (Clone.transform.position.y < LastBlock.transform.position.y)
-            {
-                Destroy(Clone);
-                BlockCreate();
-            }
+        }
+        if (Clone.transform.position.y < LastBlock.transform.position.y)
+        {
+            Destroy(Clone);
+            BlockCreate();
         }
     }
 }
