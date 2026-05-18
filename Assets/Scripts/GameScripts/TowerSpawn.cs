@@ -19,6 +19,7 @@ public class TowerSpawn : MonoBehaviour
     [SerializeField] public Transform newParent;
 
     [SerializeField] public int perfectStreak;
+    [SerializeField] public int score;
 
     private bool isFalling;
     
@@ -66,7 +67,7 @@ public class TowerSpawn : MonoBehaviour
             Destroy(Clone.GetComponent<HingeJoint>());
             isFalling = true;
             Clone.transform.rotation = new Quaternion(0,180,0,0);
-            Clone.GetComponent<Rigidbody>().freezeRotation = true;
+            Clone.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         }
         if (isFalling)
         {
@@ -79,6 +80,7 @@ public class TowerSpawn : MonoBehaviour
                     blockScript = null;
                     Clone.transform.SetParent(newParent);
                     Clone.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+                    Clone.transform.rotation = new Quaternion(0, 180, 0, 0);
                     Clone.GetComponent<Rigidbody>().isKinematic = true;
                     isFalling = false;
                     world.BlockAmount++;
@@ -92,15 +94,18 @@ public class TowerSpawn : MonoBehaviour
                         {
                             Clone.transform.position = new Vector3(LastBlock.transform.position.x, Clone.transform.position.y, Clone.transform.position.z);
                             perfectStreak++;
+                            score += 100;
                         }
                         else
                         {
                             perfectStreak = 0;
+                            score += 50;
                         }
                         LastBlock = Clone;
                         blockScript = null;
                         Clone.transform.SetParent(newParent);
                         Clone.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+                        Clone.transform.rotation = new Quaternion(0, 180, 0, 0);
                         Clone.GetComponent<Rigidbody>().isKinematic = true;
                         isFalling = false;
                         world.BlockAmount++;
@@ -110,6 +115,8 @@ public class TowerSpawn : MonoBehaviour
                     {
                         Clone.GetComponent<Rigidbody>().freezeRotation = false;
                         isFalling = false;
+                        score -= 100;
+                        perfectStreak = 0;
                     }
                 }
             }
