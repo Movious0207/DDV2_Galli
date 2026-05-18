@@ -942,6 +942,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   BlockPrefab: {fileID: 1876830005462577981, guid: 6e348bec5a51bfb40bb0112fe246c7a8, type: 3}
+  FirstBlock: {fileID: 0}
+  LastBlock: {fileID: 0}
   blockJoint: {fileID: 0}
   crane: {fileID: 2020399613}
   world: {fileID: 1093226090}
