@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6677512259251641175
+--- !u!1001 &5274581958122449596
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4148591613700080789, guid: 3d9ca7b3826f25542b1482e6e68a8b56, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4148591613700080789, guid: 3d9ca7b3826f25542b1482e6e68a8b56, type: 3}
       propertyPath: m_LocalRotation.w
@@ -50,12 +50,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5168921311486473298, guid: 3d9ca7b3826f25542b1482e6e68a8b56, type: 3}
       propertyPath: m_Name
-      value: Building2
+      value: Building3
       objectReference: {fileID: 0}
     - target: {fileID: 8649622133320503806, guid: 3d9ca7b3826f25542b1482e6e68a8b56, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -7199748541425253867, guid: 042a0aba80f9e324789eba0b7e3c8a35, type: 3}
+      objectReference: {fileID: -8026837276291358063, guid: abfb2fe72195dae47840c322936a8aff, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

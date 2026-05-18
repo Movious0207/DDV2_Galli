@@ -61,7 +61,7 @@ public class TowerSpawn : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space) && Time.timeScale == 1) 
         {
             Clone.transform.SetParent(null);
             Destroy(Clone.GetComponent<HingeJoint>());
