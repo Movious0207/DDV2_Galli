@@ -113,16 +113,15 @@ public class TowerSpawn : MonoBehaviour
                     }
                     else
                     {
-                        Clone.GetComponent<Rigidbody>().freezeRotation = false;
                         isFalling = false;
-                        score -= 100;
-                        perfectStreak = 0;
                     }
                 }
             }
         }
         if (Clone.transform.position.y < LastBlock.transform.position.y)
         {
+            score -= 100;
+            perfectStreak = 0;
             Destroy(Clone);
             BlockCreate();
         }
