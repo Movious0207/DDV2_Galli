@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class CraneMovement : MonoBehaviour
 {
-    [SerializeField] private int swingSpeed = 5;
+    [SerializeField] private int swingSpeed;
     [SerializeField] private Transform worldCoords;
 
     void Start()

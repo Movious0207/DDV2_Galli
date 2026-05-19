@@ -4,6 +4,7 @@ using UnityEngine;
 public class TowerSpawn : MonoBehaviour
 {
     [SerializeField] public GameObject FirstBlockPrefab;
+    [SerializeField] public Rigidbody CloneRigidbody;
     [SerializeField] public GameObject BlockPrefab1;
     [SerializeField] public GameObject BlockPrefab2;
     [SerializeField] public GameObject BlockPrefab3;
@@ -50,6 +51,7 @@ public class TowerSpawn : MonoBehaviour
         }
         blockScript = Clone.GetComponent<BlockScript>();
         blockJoint = Clone.GetComponent<HingeJoint>();
+        CloneRigidbody = Clone.GetComponent<Rigidbody>();
         blockJoint.connectedBody = crane;
     }
 
@@ -67,7 +69,7 @@ public class TowerSpawn : MonoBehaviour
             Destroy(Clone.GetComponent<HingeJoint>());
             isFalling = true;
             Clone.transform.rotation = new Quaternion(0,180,0,0);
-            Clone.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            CloneRigidbody.angularVelocity = Vector3.zero;
         }
         if (isFalling)
         {
@@ -79,9 +81,9 @@ public class TowerSpawn : MonoBehaviour
                     LastBlock = Clone;
                     blockScript = null;
                     Clone.transform.SetParent(newParent);
-                    Clone.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+                    CloneRigidbody.linearVelocity = Vector3.zero;
                     Clone.transform.rotation = new Quaternion(0, 180, 0, 0);
-                    Clone.GetComponent<Rigidbody>().isKinematic = true;
+                    CloneRigidbody.isKinematic = true;
                     isFalling = false;
                     world.BlockAmount++;
                     BlockCreate();
@@ -95,18 +97,20 @@ public class TowerSpawn : MonoBehaviour
                             Clone.transform.position = new Vector3(LastBlock.transform.position.x, Clone.transform.position.y, Clone.transform.position.z);
                             perfectStreak++;
                             score += 100;
+                            AudioManager.PlaySound(SoundType.Perfect,1);
                         }
                         else
                         {
                             perfectStreak = 0;
                             score += 50;
+                            AudioManager.PlaySound(SoundType.Collision,1);
                         }
                         LastBlock = Clone;
                         blockScript = null;
                         Clone.transform.SetParent(newParent);
-                        Clone.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+                        CloneRigidbody.linearVelocity = Vector3.zero;
                         Clone.transform.rotation = new Quaternion(0, 180, 0, 0);
-                        Clone.GetComponent<Rigidbody>().isKinematic = true;
+                        CloneRigidbody.isKinematic = true;
                         isFalling = false;
                         world.BlockAmount++;
                         BlockCreate();
@@ -118,7 +122,7 @@ public class TowerSpawn : MonoBehaviour
                 }
             }
         }
-        if (Clone.transform.position.y < LastBlock.transform.position.y)
+        if (Clone.transform.position.y < LastBlock.transform.position.y + 0.5)
         {
             score -= 100;
             perfectStreak = 0;

@@ -26,13 +26,19 @@ public class GamePlayUI : MonoBehaviour
             if (Time.timeScale == 1)
             {
                 Time.timeScale = 0;
-                pauseMenu.SetActive(true);
             }
             else
             {
                 Time.timeScale = 1;
-                pauseMenu.SetActive(false);
             }
+        }
+        if (Time.timeScale == 1)
+        {
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            pauseMenu.SetActive(true);
         }
 
         if(Manager.perfectStreak <= 0)
