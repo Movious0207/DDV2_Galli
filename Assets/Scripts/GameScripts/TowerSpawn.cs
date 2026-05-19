@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TowerSpawn : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class TowerSpawn : MonoBehaviour
     [SerializeField] public int score;
 
     private bool isFalling;
-    
+
     private GameObject Clone;
 
     void BlockCreate()
@@ -58,8 +59,12 @@ public class TowerSpawn : MonoBehaviour
     void Start()
     {
         BlockCreate();
+        if (!GameManager.instance.FirstLoad)
+        {
+            GameManager.instance.FirstLoad = true;
+            SceneManager.UnloadSceneAsync(1);
+        }
     }
-
 
     void Update()
     {
@@ -77,6 +82,15 @@ public class TowerSpawn : MonoBehaviour
             {
                 if(blockScript.worldCollided)
                 {
+                    if(LastBlock != null)
+                    {
+                    score -= 100;
+                    perfectStreak = 0;
+                    Destroy(Clone);
+                    BlockCreate();
+                    }
+                    else
+                    {
                     FirstBlock = Clone;
                     LastBlock = Clone;
                     blockScript = null;
@@ -86,7 +100,8 @@ public class TowerSpawn : MonoBehaviour
                     CloneRigidbody.isKinematic = true;
                     isFalling = false;
                     world.BlockAmount++;
-                    BlockCreate();
+                    BlockCreate();   
+                    }
                 }
                 else
                 {
@@ -97,13 +112,13 @@ public class TowerSpawn : MonoBehaviour
                             Clone.transform.position = new Vector3(LastBlock.transform.position.x, Clone.transform.position.y, Clone.transform.position.z);
                             perfectStreak++;
                             score += 100;
-                            AudioManager.PlaySound(SoundType.Perfect,1);
+                            GameManager.PlaySound(SoundType.Perfect,GameManager.instance.sfxVolume * GameManager.instance.masterVolume);
                         }
                         else
                         {
                             perfectStreak = 0;
                             score += 50;
-                            AudioManager.PlaySound(SoundType.Collision,1);
+                            GameManager.PlaySound(SoundType.Collision,GameManager.instance.sfxVolume * GameManager.instance.masterVolume);
                         }
                         LastBlock = Clone;
                         blockScript = null;
@@ -114,6 +129,7 @@ public class TowerSpawn : MonoBehaviour
                         isFalling = false;
                         world.BlockAmount++;
                         BlockCreate();
+                        GameManager.instance.SaveHighScore(score);
                     }
                     else
                     {
